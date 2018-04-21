@@ -6,7 +6,7 @@
 - [Prerequisitos](#Prerequisitos)
 - [Instalacion](#instalacion)
 - [Uso](#uso)
-- [Carga Inicial](#Carga Inicial)
+- [BD](#BD)
 
 ## Prerequisitos
 
@@ -47,7 +47,9 @@ Loan:
 
 	- GET /loans?limit=1&offset=0&user_id=2 "Obtine una pagina de prestamos segun los parametros enviados. los parametros limit y offset son obligatorios mientras que user_id es opcional"
 	
-## Carga Inicial
+## BD
+
+Carga Inicial
 
 Usuarios:
 
