@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3305/cash_online_db
+    username: cashOnlineApp
+    password: 123456789
