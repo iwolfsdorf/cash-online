@@ -21,25 +21,37 @@ public class UserServiceImpl implements UserService {
   private UserRepository userRepository;
 
   @Override
-  public User createUser(User user) throws ServiceException {
+  public User createUser(final User user) throws ServiceException {
     log.info("Se crea el usuario {}", user);
-    return userRepository.save(user);
-  }
-
-  @Override
-  public void deleteUser(Long id) throws ServiceException {
-    log.info("Se elimina el usuario con identificador {}.", id);
-    userRepository.deleteById(id);;
-  }
-
-  @Override
-  public User getUser(Long id) throws ServiceException {
-    log.info("Se obtiene el usuario con identificador {}.", id);
-    Optional<User> optionalUser = userRepository.findById(id);
-    if (optionalUser.isPresent()) {
-      return optionalUser.get();
+    try {
+      return userRepository.save(user);
+    } catch (final Exception ex) {
+      throw new ServiceException("Ocurrio un error al crear un usuario.", ex);
     }
-    throw new ServiceException("No se encontro el usuario con identificador " + id);
+  }
+
+  @Override
+  public void deleteUser(final Long id) throws ServiceException {
+    log.info("Se elimina el usuario con identificador {}.", id);
+    try {
+      userRepository.deleteById(id);;
+    } catch (final Exception ex) {
+      throw new ServiceException("Ocurrio un error al eliminar el usuario con id: " + id, ex);
+    }
+  }
+
+  @Override
+  public User getUser(final Long id) throws ServiceException {
+    log.info("Se obtiene el usuario con identificador {}.", id);
+    try {
+      final Optional<User> optionalUser = userRepository.findById(id);
+      if (optionalUser.isPresent()) {
+        return optionalUser.get();
+      }
+      return null;
+    } catch (final Exception ex) {
+      throw new ServiceException("Ocurrio un error al buscar el usuario con id: " + id, ex);
+    }
   }
 
 }
