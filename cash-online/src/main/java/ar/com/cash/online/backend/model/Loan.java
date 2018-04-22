@@ -23,6 +23,9 @@ public class Loan {
 
   public Loan() {
 
+  public Loan(final BigDecimal total, final Long user_id) {
+    this.total = total;
+    this.user_id = user_id;
   }
 
   public Loan(final Long id, final BigDecimal total, final Long user_id) {
