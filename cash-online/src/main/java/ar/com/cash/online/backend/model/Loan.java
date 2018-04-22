@@ -16,7 +16,7 @@ public class Loan {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "LOAN_ID")
-  private Integer id;
+  private Long id;
   @Column(name = "TOTAL")
   private BigDecimal total;
   private Long user_id;
@@ -25,17 +25,17 @@ public class Loan {
 
   }
 
-  public Loan(final Integer id, final BigDecimal total, final Long user_id) {
+  public Loan(final Long id, final BigDecimal total, final Long user_id) {
     this.id = id;
     this.total = total;
     this.user_id = user_id;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(final Integer id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -51,7 +51,7 @@ public class Loan {
     return user_id;
   }
 
-  public void setUser_id(Long user_id) {
+  public void setUser_id(final Long user_id) {
     this.user_id = user_id;
   }
 
