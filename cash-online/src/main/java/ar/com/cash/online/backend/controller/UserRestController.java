@@ -36,11 +36,14 @@ public class UserRestController {
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> getUser(@PathVariable final Long id) {
     try {
-      return new ResponseEntity<User>(userService.getUser(id), HttpStatus.OK);
+      final User user = userService.getUser(id);
+      if (user != null) {
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+      } else {
+        log.error("No se encontro el usuario con identificador {}.", id);
+        throw new NotFoundException("No se encontro el usuario con identificador " + id);
+      }
     } catch (final ServiceException e) {
-      log.error("No se encontro el usuario con identificador {}.", id);
-      throw new NotFoundException("No se encontro el usuario con identificador " + id);
-    } catch (final Exception e) {
       log.error("Se produjo un error desconocido.", e);
       throw new InternalServerErrorException("Se produjo un error interno.");
     }
@@ -53,9 +56,6 @@ public class UserRestController {
       userService.deleteUser(id);
       return new ResponseEntity<String>("Usuario " + id + " eliminado correctamento.", HttpStatus.OK);
     } catch (final ServiceException e) {
-      log.error("No se encontro el usuario con identificador {}.", id);
-      throw new NotFoundException("No se encontro el usuario con identificador " + id);
-    } catch (final Exception e) {
       log.error("Se produjo un error desconocido.", e);
       throw new InternalServerErrorException("Se produjo un error interno.");
     }
@@ -70,10 +70,7 @@ public class UserRestController {
       return new ResponseEntity<String>("Se creo el usuario correctamento con id " + user.getId() + ".", HttpStatus.OK);
     } catch (final ServiceException e) {
       log.error("No se pudo crear el usuario.");
-      throw new NotFoundException("No se pudo crear el usuario.");
-    } catch (final Exception e) {
-      log.error("Se produjo un error desconocido.", e);
-      throw new InternalServerErrorException("Se produjo un error interno.");
+      throw new InternalServerErrorException("No se pudo crear el usuario.");
     }
   }
 
