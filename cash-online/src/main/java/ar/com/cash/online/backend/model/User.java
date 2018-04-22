@@ -30,6 +30,14 @@ public class User {
   @JoinColumn(name = "USER_ID")
   private List<Loan> loans;
 
+  public User() {}
+
+  public User(String email, String first_name, String last_name) {
+    this.email = email;
+    this.first_name = first_name;
+    this.last_name = last_name;
+  }
+
   public Long getId() {
     return id;
   }
