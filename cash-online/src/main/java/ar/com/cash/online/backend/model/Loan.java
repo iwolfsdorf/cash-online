@@ -21,7 +21,7 @@ public class Loan {
   private BigDecimal total;
   private Long user_id;
 
-  public Loan() {
+  public Loan() {}
 
   public Loan(final BigDecimal total, final Long user_id) {
     this.total = total;
