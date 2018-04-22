@@ -55,4 +55,24 @@ public class Loan {
     this.user_id = user_id;
   }
 
+  @Override
+  public boolean equals(final Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Loan)) {
+      return false;
+    }
+    final Loan loan = (Loan) o;
+    return loan.id == id && loan.total.equals(total) && loan.user_id == user_id;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = 17;
+    result = 31 * result + id.intValue();
+    result = 31 * result + total.intValue();
+    result = 31 * result + user_id.intValue();
+    return result;
+  }
+
 }

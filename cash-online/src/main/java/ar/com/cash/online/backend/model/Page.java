@@ -28,4 +28,24 @@ public class Page<T> {
     this.paging = paging;
   }
 
+  @Override
+  public boolean equals(final Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Page)) {
+      return false;
+    }
+    @SuppressWarnings("unchecked")
+    final Page<T> page = (Page<T>) o;
+    return page.items.equals(items) && page.paging.equals(paging);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = 17;
+    result = 31 * result + items.hashCode();
+    result = 31 * result + paging.hashCode();
+    return result;
+  }
+
 }

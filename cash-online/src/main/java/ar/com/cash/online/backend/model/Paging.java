@@ -36,4 +36,23 @@ public class Paging {
     this.total = total;
   }
 
+  @Override
+  public boolean equals(final Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Paging)) {
+      return false;
+    }
+    final Paging paging = (Paging) o;
+    return paging.limit == limit && paging.offset == offset && paging.total == total;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = 17;
+    result = 31 * result + limit;
+    result = 31 * result + offset;
+    return result;
+  }
+
 }

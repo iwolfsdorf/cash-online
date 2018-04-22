@@ -70,4 +70,24 @@ public class User {
     this.loans = loans;
   }
 
+  @Override
+  public boolean equals(final Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof User)) {
+      return false;
+    }
+    final User user = (User) o;
+    return user.email.equals(email) && user.first_name.equals(first_name) && user.last_name.equals(last_name);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = 17;
+    result = 31 * result + email.hashCode();
+    result = 31 * result + first_name.hashCode();
+    result = 31 * result + last_name.hashCode();
+    return result;
+  }
+
 }
