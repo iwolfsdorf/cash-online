@@ -1,12 +1,14 @@
 package ar.com.cash.online.backend.repository;
 
+import org.springframework.data.repository.Repository;
+
 import javax.persistence.criteria.Predicate;
 
 import ar.com.cash.online.backend.exception.ServiceException;
 import ar.com.cash.online.backend.model.Loan;
 import ar.com.cash.online.backend.model.Page;
 
-public interface LoanRepository {
+public interface LoanRepository extends Repository<Loan, Long> {
 
   /**
    * Obtiene una pagina de los prestamos de los usuarios.
